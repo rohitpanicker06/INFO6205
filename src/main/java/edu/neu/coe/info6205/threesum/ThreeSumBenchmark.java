@@ -1,9 +1,11 @@
 package edu.neu.coe.info6205.threesum;
 
+import com.google.common.base.Stopwatch;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.TimeLogger;
 import edu.neu.coe.info6205.util.Utilities;
 
+import java.time.Duration;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -20,6 +22,7 @@ public class ThreeSumBenchmark {
         benchmarkThreeSum("ThreeSumQuadratic", (xs) -> new ThreeSumQuadratic(xs).getTriples(), n, timeLoggersQuadratic);
         benchmarkThreeSum("ThreeSumQuadrithmic", (xs) -> new ThreeSumQuadrithmic(xs).getTriples(), n, timeLoggersQuadrithmic);
         benchmarkThreeSum("ThreeSumCubic", (xs) -> new ThreeSumCubic(xs).getTriples(), n, timeLoggersCubic);
+        benchmarkThreeSum("ThreeSumQuadraticWithCalipers", (xs)-> new ThreeSumQuadraticWithCalipers(xs).getTriples(), n, timeLoggersQuadratic);
     }
 
     public static void main(String[] args) {
@@ -34,8 +37,22 @@ public class ThreeSumBenchmark {
 
     private void benchmarkThreeSum(final String description, final Consumer<int[]> function, int n, final TimeLogger[] timeLoggers) {
         if (description.equals("ThreeSumCubic") && n > 4000) return;
-        // FIXME
-        // END 
+        System.out.println("Executing " + description+ " for " + runs + " time");
+        double startTime = System.currentTimeMillis();
+
+        for(int i = 0; i<runs;i++)
+        {
+            function.accept(supplier.get());
+        }
+
+        double timeElapsed = (double ) System.currentTimeMillis() - startTime;
+        double timeElapsedPerRun = (double) timeElapsed/runs;
+
+        for(TimeLogger timelogger : timeLoggers)
+        {
+            timelogger.log((double) timeElapsedPerRun, n);
+        }
+
     }
 
     private final static TimeLogger[] timeLoggersCubic = {

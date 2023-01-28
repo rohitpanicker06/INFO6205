@@ -65,4 +65,8 @@ public class Utilities {
     public static double lg(double n) {
         return Math.log(n) / Math.log(2);
     }
+
+    public static void main(String[] args) {
+
+    }
 }

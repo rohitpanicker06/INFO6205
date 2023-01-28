@@ -30,4 +30,8 @@ public class TimeLogger {
     private static final DecimalFormat decimalFormat = (DecimalFormat)
             NumberFormat.getNumberInstance(locale);
 
+    public static void main(String[] args) {
+
+    }
+
 }

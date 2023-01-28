@@ -19,6 +19,10 @@ public interface Benchmark<T> {
         return runFromSupplier(() -> t, m);
     }
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * Run function f m times and return the average time in milliseconds.
      *

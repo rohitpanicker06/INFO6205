@@ -17,6 +17,10 @@ public class ThreeSumQuadratic implements ThreeSum {
      * Construct a ThreeSumQuadratic on a.
      * @param a a sorted array.
      */
+
+    public static void main(String[] args) {
+
+    }
     public ThreeSumQuadratic(int[] a) {
         this.a = a;
         length = a.length;
@@ -37,11 +41,27 @@ public class ThreeSumQuadratic implements ThreeSum {
      */
     public List<Triple> getTriples(int j) {
         List<Triple> triples = new ArrayList<>();
-        // FIXME : for each candidate, test if a[i] + a[j] + a[k] = 0.
-        // END 
+        int lefPointer = 0;
+        int rightPoiner = this.length-1;
+        while(lefPointer<j && rightPoiner>j)
+        {
+            int sum = this.a[lefPointer] + this.a[j] + this.a[rightPoiner];
+            if(sum == 0)
+            {
+                triples.add(new Triple(this.a[lefPointer], this.a[j], this.a[rightPoiner]));
+                lefPointer++;
+                rightPoiner--;
+            }else if (sum<0 ){
+                lefPointer++;
+            }else{
+                rightPoiner--;
+            }
+        }
         return triples;
     }
 
     private final int[] a;
     private final int length;
+
+
 }

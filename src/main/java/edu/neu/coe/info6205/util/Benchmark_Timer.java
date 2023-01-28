@@ -81,6 +81,10 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
         this.fPost = fPost;
     }
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * Constructor for a Benchmark_Timer with option of specifying all three functions.
      *

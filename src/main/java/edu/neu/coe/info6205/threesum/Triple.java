@@ -50,4 +50,8 @@ class Triple implements Comparable<Triple> {
     final int x;
     final int y;
     final int z;
+
+    public static void main(String[] args) {
+
+    }
 }

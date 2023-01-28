@@ -10,4 +10,8 @@ public interface ThreeSum {
      * @return an ordered, distinct, array of Triple.
      */
     Triple[] getTriples();
+
+    public static void main(String[] args) {
+
+    }
 }

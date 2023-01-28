@@ -46,13 +46,30 @@ public class ThreeSumQuadraticWithCalipers implements ThreeSum {
      * @param function a function which takes a triple and returns a value which will be compared with zero.
      * @return a List of Triples.
      */
-    public static List<Triple> calipers(int[] a, int i, Function<Triple, Integer> function) {
+    public static List<Triple> calipers(int[] a, int j, Function<Triple, Integer> function) {
         List<Triple> triples = new ArrayList<>();
-        // FIXME : use function to qualify triples and to navigate otherwise.
-        // END 
+        int lefPointer = 0;
+        int rightPoiner = a.length-1;
+        while(lefPointer<j && rightPoiner>j)
+        {
+            int sum = function.apply(new Triple(a[lefPointer], a[j], a[rightPoiner]));
+if(sum == 0){
+    triples.add(new Triple(a[lefPointer], a[j], a[rightPoiner]));
+                lefPointer++;
+                rightPoiner--;
+            }else if (sum<0 ){
+                lefPointer++;
+            }else{
+                rightPoiner--;
+            }
+        }
         return triples;
     }
 
     private final int[] a;
     private final int length;
+
+    public static void main(String[] args) {
+
+    }
 }
