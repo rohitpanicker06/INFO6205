@@ -10,6 +10,7 @@ public class Timer {
     /**
      * Construct a new Timer and set it running.
      */
+    private static int MILLI_CONSTANT = 1000000;
     public Timer() {
         resume();
     }
@@ -55,9 +56,28 @@ public class Timer {
      * @return the average milliseconds per repetition.
      */
     public <T, U> double repeat(int n, Supplier<T> supplier, Function<T, U> function, UnaryOperator<T> preFunction, Consumer<U> postFunction) {
+
         logger.trace("repeat: with " + n + " runs");
-        // FIXME: note that the timer is running when this method is called and should still be running when it returns. by replacing the following code
-         return 0;
+        this.pause();
+        for (int i = 0; i < n; ++i) {
+            T x = supplier.get();
+            if (preFunction == null) {
+
+            }else{
+                x = preFunction.apply(x);
+            }
+            resume();
+            U result = function.apply(x);
+            pauseAndLap();
+            if (postFunction == null) {
+
+            }else{
+                postFunction.accept(result);
+            }
+        }
+        double finalResult = meanLapTime();
+        resume();
+        return finalResult;
         // END 
     }
 
@@ -176,8 +196,8 @@ public class Timer {
      * @return the number of ticks for the system clock. Currently defined as nano time.
      */
     private static long getClock() {
-        // FIXME by replacing the following code
-         return 0;
+        long nanoClock = System.nanoTime();
+        return nanoClock;
         // END 
     }
 
@@ -189,8 +209,8 @@ public class Timer {
      * @return the corresponding number of milliseconds.
      */
     private static double toMillisecs(long ticks) {
-        // FIXME by replacing the following code
-         return 0;
+        double tempTicks = ticks/MILLI_CONSTANT;
+       return tempTicks;
         // END 
     }
 
