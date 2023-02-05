@@ -80,7 +80,7 @@ public class BenchMarkingInsertionSort {
 
                 Map<String, Supplier<Integer[]>> supplierMap = new HashMap<>();
 
-                Benchmark_Timer<Integer[]> benchMarkRunner = new Benchmark_Timer<>("InsertionSort", InsertionSort::sortConsumer);
+                Benchmark_Timer<Integer[]> benchMarkRunner = new Benchmark_Timer<>("InsertionSort", InsertionSort::sortForBenchmark);
                 System.out.println("elements = " + size + ", " +  "random array: " + benchMarkRunner.runFromSupplier(() -> getRandomArray(size), 100));
                 System.out.println("elements = " + size + ", "  + "ordered array: " + benchMarkRunner.runFromSupplier(() -> getOrdered(size), 100));
                 System.out.println("elements = " + size + ", " +   " partially array: " + benchMarkRunner.runFromSupplier(() -> partiallyOrdered(size), 100));

@@ -84,7 +84,7 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
         new InsertionSort<T>().mutatingSort(ts);
     }
 
-    public static <T extends Comparable<T>> T[] sortConsumer(T[] ts) {
+    public static <T extends Comparable<T>> T[] sortForBenchmark(T[] ts) {
         new InsertionSort<T>().sort(ts);
         return ts;
     }
