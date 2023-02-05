@@ -80,11 +80,11 @@ public class BenchMarkingInsertionSort {
 
                 Map<String, Supplier<Integer[]>> supplierMap = new HashMap<>();
 
-                Benchmark_Timer<Integer[]> bt = new Benchmark_Timer<>("InsertionSort", InsertionSort::sortConsumer);
-                System.out.println("elements = " + size + ", " +  "random array: " + bt.runFromSupplier(() -> getRandomArray(size), 100));
-                System.out.println("elements = " + size + ", "  + "ordered array: " + bt.runFromSupplier(() -> getOrdered(size), 100));
-                System.out.println("elements = " + size + ", " +   " partially array: " + bt.runFromSupplier(() -> partiallyOrdered(size), 100));
-                System.out.println("elements = " + size + ", " +   "reverse array: " + bt.runFromSupplier(() -> reverseOrdered(size), 100));
+                Benchmark_Timer<Integer[]> benchMarkRunner = new Benchmark_Timer<>("InsertionSort", InsertionSort::sortConsumer);
+                System.out.println("elements = " + size + ", " +  "random array: " + benchMarkRunner.runFromSupplier(() -> getRandomArray(size), 100));
+                System.out.println("elements = " + size + ", "  + "ordered array: " + benchMarkRunner.runFromSupplier(() -> getOrdered(size), 100));
+                System.out.println("elements = " + size + ", " +   " partially array: " + benchMarkRunner.runFromSupplier(() -> partiallyOrdered(size), 100));
+                System.out.println("elements = " + size + ", " +   "reverse array: " + benchMarkRunner.runFromSupplier(() -> reverseOrdered(size), 100));
 
         }
     }
