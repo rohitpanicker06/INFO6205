@@ -60,6 +60,40 @@ public class MergeSort<X extends Comparable<X>> extends SortWithHelper<X> {
         }
 
         // FIXME : implement merge sort with insurance and no-copy optimizations
+        // Determine the midpoint index of the sub-array to be sorted
+        int mid = from + (to - from) / 2;
+
+        if (noCopy) {
+            // Sort the left and right sub-arrays separately
+            sort(aux, a, from, mid);
+            sort(aux, a, mid, to);
+
+            // Check if the merging step can be skipped due to a pre-existing order
+            if (insurance && helper.less(aux, mid - 1, mid)) {
+                // Copy the already-sorted sub-array back into the original array
+                System.arraycopy(aux, from, a, from, to - from);
+                helper.incrementCopies(to - from);
+            } else {
+                // Merge the sorted sub-arrays back into the original array
+                merge(aux, a, from, mid, to);
+            }
+        } else {
+            // Sort the left and right sub-arrays separately, using a different auxiliary array
+            sort(a, aux, from, mid);
+            sort(a, aux, mid, to);
+
+            // Copy the left and right sub-arrays into the auxiliary array
+            System.arraycopy(a, from, aux, from, to - from);
+
+            // Check if the merging step can be skipped due to a pre-existing order
+            if (insurance && helper.less(a[mid - 1], a[mid])) {
+                return; // The sub-array is already sorted, so we can stop sorting
+            }
+
+            // Merge the sorted sub-arrays back into the original array
+            merge(aux, a, from, mid, to);
+        }
+
         // END 
     }
 
